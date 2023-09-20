@@ -132,13 +132,16 @@ fun isCorrectInput(
     userInput: String,
     wordLength: Int,
     alphabet: String,
-): Boolean {
-    if (userInput.length != wordLength) {
+) = when {
+    userInput.length != wordLength -> {
         println("The length of your guess should be $wordLength characters! Try again!")
-        return false
-    } else if (userInput.filterNot { it in alphabet }.isNotEmpty()) {
-        println("All symbols in your guess should be the $alphabet alphabet characters! Try again!")
-        return false
+        false
     }
-    return true
+
+    userInput.filterNot { it in alphabet }.isNotEmpty() -> {
+        println("All symbols in your guess should be the $alphabet alphabet characters! Try again!")
+        false
+    }
+
+    else -> true
 }
